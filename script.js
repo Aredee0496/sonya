@@ -11,9 +11,9 @@ const app = {
         ผลไม้: ["APPLE", "BANANA", "ORANGE", "GRAPE"]
     },
     sounds: {
-        select: new Audio("sounds/select.mp3.play()"),  // เสียงเมื่อเลือกตัวอักษร
-        correct: new Audio("sounds/correct.mp3.play()"), // เสียงเมื่อตอบถูก
-        wrong: new Audio("sounds/wrong.mp3.play()") // เสียงเมื่อตอบผิด
+        select: new Audio("sounds/select.mp3"),  // เสียงเมื่อเลือกตัวอักษร
+        correct: new Audio("sounds/correct.mp3"), // เสียงเมื่อตอบถูก
+        wrong: new Audio("sounds/wrong.mp3") // เสียงเมื่อตอบผิด
     },
     init() {
         this.bindEvents();
