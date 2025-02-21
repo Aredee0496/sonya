@@ -83,21 +83,26 @@ const app = {
         });
     },
     checkAnswer() {
-        const answer = Array.from(document.querySelectorAll(".slot")).map(slot => slot.textContent).join("");
-        const correctAnswer = this.questions[this.currentCategory][this.currentQuestionIndex];
-        if (answer === correctAnswer) {
-            document.getElementById("feedback").textContent = "✓";
-            document.getElementById("feedback").style.color = "green";
-            this.sounds.correct.play(); // เล่นเสียงเมื่อตอบถูก
-            this.coins += correctAnswer.length;
-            document.getElementById("coins").textContent = this.coins;
-            setTimeout(() => this.nextQuestion(), 1000);
-        } else {
-            document.getElementById("feedback").textContent = "✗";
-            document.getElementById("feedback").style.color = "red";
-            this.sounds.wrong.play(); // เล่นเสียงเมื่อตอบผิด
+        const slots = document.querySelectorAll(".slot");
+        const answer = Array.from(slots).map(slot => slot.textContent).join("");
+        
+        // ตรวจสอบว่าแต่ละช่องมีตัวอักษรหรือไม่
+        if (slots.length === answer.length && answer !== "") {
+            const correctAnswer = this.questions[this.currentCategory][this.currentQuestionIndex];
+            if (answer === correctAnswer) {
+                document.getElementById("feedback").textContent = "✓";
+                document.getElementById("feedback").style.color = "green";
+                this.sounds.correct.play(); // เล่นเสียงเมื่อตอบถูก
+                this.coins += correctAnswer.length;
+                document.getElementById("coins").textContent = this.coins;
+                setTimeout(() => this.nextQuestion(), 1000);
+            } else {
+                document.getElementById("feedback").textContent = "✗";
+                document.getElementById("feedback").style.color = "red";
+                this.sounds.wrong.play(); // เล่นเสียงเมื่อตอบผิด
+            }
         }
-    },
+    },    
     nextQuestion() {
         this.currentQuestionIndex++;
         if (this.currentQuestionIndex < this.questions[this.currentCategory].length) {
