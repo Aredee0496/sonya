@@ -13,16 +13,24 @@ const app = {
     sounds: {
         select: new Audio("sounds/select.mp3"),  // เสียงเมื่อเลือกตัวอักษร
         correct: new Audio("sounds/correct.mp3"), // เสียงเมื่อตอบถูก
-        wrong: new Audio("sounds/wrong.mp3") // เสียงเมื่อตอบผิด
+        wrong: new Audio("sounds/wrong.mp3"), // เสียงเมื่อตอบผิด
+        background: new Audio("sounds/background.mp3") // เสียงพื้นหลัง
     },
     init() {
         this.bindEvents();
     },
     bindEvents() {
-        document.getElementById("start-button").addEventListener("click", () => this.showCategoryPage());
+        document.getElementById("start-button").addEventListener("click", () => {
+            this.showCategoryPage();
+            this.playBackgroundSound();
+        });
         document.querySelectorAll(".category-button").forEach(button => {
             button.addEventListener("click", (e) => this.startGame(e.target.dataset.category));
         });
+    },
+    playBackgroundSound() {
+        this.sounds.background.loop = true;
+        this.sounds.background.play(); 
     },
     showCategoryPage() {
         document.getElementById("home-page").classList.add("hidden");
@@ -102,7 +110,7 @@ const app = {
                 this.sounds.wrong.play(); // เล่นเสียงเมื่อตอบผิด
             }
         }
-    },    
+    },
     nextQuestion() {
         this.currentQuestionIndex++;
         if (this.currentQuestionIndex < this.questions[this.currentCategory].length) {
@@ -128,4 +136,4 @@ const app = {
     }
 };
 
-app.init();
+app.init();  
